@@ -14,4 +14,15 @@ public abstract class Product {
     }
 
 
+    public void add(Product product) {
+        sale.add(product);
+    }
+
+    public void setValue(int price ) {
+        if(price >= 0 ) {
+            value = price;
+        }
+    }
+
+
 }
