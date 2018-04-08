@@ -1,6 +1,6 @@
-package input.messages;
+package output.messages;
 
-public class SaleAndOccurence implements Messages {
+public class MessageTenItem implements Messages {
 
     @Override
     public String printMessage() {

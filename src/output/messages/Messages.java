@@ -1,4 +1,4 @@
-package input.messages;
+package output.messages;
 
 public interface Messages {
 
