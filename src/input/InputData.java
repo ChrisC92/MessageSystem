@@ -42,7 +42,7 @@ public class InputData {
         return listOfSales;
     }
 
-    public static List batchMultiplySales(int NUMBER_OF_SALES) {
+    public static List batchModifySales(int NUMBER_OF_SALES) {
         NUMBER_OF_SALES = NUMBER_OF_SALES / 3;
         String orderApple1 = singularSale("apple", 5);
         String orderPear1 = singularSale("pear", 10);
@@ -52,9 +52,13 @@ public class InputData {
             listOfSales.add(orderApple1);
             listOfSales.add(orderPear1);
             listOfSales.add(orderBanana1);
-            if(i == 10) {
-                String appliesTwiceThePrice = adjustPrice("apple", Adjustment.MULTIPLY, 2);
-                listOfSales.add(appliesTwiceThePrice);
+            if(i % 3000 == 0) {
+                String pearsPriceReduce = adjustPrice("pears", Adjustment.SUBTRACT, 5);
+                String bananasAddPrice = adjustPrice("banana", Adjustment.ADD, 5);
+                String applesTwiceThePrice = adjustPrice("apple", Adjustment.MULTIPLY, 2);
+                listOfSales.add(applesTwiceThePrice);
+                listOfSales.add(pearsPriceReduce);
+                listOfSales.add(bananasAddPrice);
             }
         }
         return listOfSales;

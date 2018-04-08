@@ -23,7 +23,7 @@ public class Sale {
         return productName;
     }
 
-    public int getSinglePrice() {
+    public int getCurrrentPrice() {
         return price;
     }
 

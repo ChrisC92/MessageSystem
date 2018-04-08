@@ -61,12 +61,28 @@ public class OutputTests {
         List<String> orders = InputData.batchMultipleSales(3000);
         parseInput.addSalesFromList(orders);
         List<Sale> sales = parseInput.getListOfSales();
+        Sale apples = sales.get(0);
+        Sale pears = sales.get(1);
+        Sale bananas = sales.get(2);
 
-        assertEquals();
+        assertEquals(1600, apples.getNumberOfSales());
+        assertEquals(1900, pears.getNumberOfSales());
     }
 
     @Test
-    public void adjustmentTest() {
+    public void modifyTests() {
+        ParseInput parseInput = new ParseInput();
+        List<String> orders = InputData.batchModifySales(3000);
+        parseInput.addSalesFromList(orders);
+        List<Sale> sales = parseInput.getListOfSales();
+        Sale apples = sales.get(0);
+        Sale pears = sales.get(1);
+        Sale bananas = sales.get(2);
+
+        assertEquals(10, apples.getCurrrentPrice());
+        assertEquals(5, pears.getCurrrentPrice());
+        assertEquals(20, bananas.getCurrrentPrice());
+
 
     }
 
