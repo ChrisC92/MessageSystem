@@ -23,10 +23,10 @@ public class ParseInput {
     public void addSale(String sale) {
         String firstWordRegex = "([^\\\\\\s]+)";
 
-        String toCheck = extractRegex(sale, firstWordRegex);
+        String toCheck = extractRegex(sale, firstWordRegex, 0);
 
         if (toCheck.matches("[0-9]+") && toCheck.length() > 0) {
-            createNumericProduct(sale);
+            createMultiProducts(sale);
         } else if (toCheck.toUpperCase().equals(toCheck)) {
             createAdjustmentProduct(sale);
         } else if (!toCheck.toUpperCase().equals(toCheck)) {
@@ -40,30 +40,36 @@ public class ParseInput {
         return sales;
     }
 
-    private void createSingleProduct(String sale) {
-        Sale product = getProductInfo(sale);
-        addToList(product);
+    private void createSingleProduct(String saleString) {
+        String name = extractRegex(saleString, "([^\\\\\\s]+)", 0);
+        String price = extractRegex(saleString, "(\\d+)", 0);
+        Sale sale = new Sale(name, Integer.parseInt(price));
+        addToList(sale);
     }
 
     private void createAdjustmentProduct(String sale) {
     }
-
-    private void createNumericProduct(String sale) {
+    // 10 apples at 10p
+    private void createMultiProducts(String saleString) {
+        int numOfSales = Integer.parseInt(extractRegex(saleString, "([^\\\\\\s]+)", 0));
+        String name = extractRegex(saleString, "^\\S*\\s+(\\S+)", 1);
+        name = removeLastChar(name);
+        String priceString = extractRegex(saleString, "(\\d+[p])", 0);
+        priceString = removeLastChar(priceString);
+        int price = Integer.parseInt(priceString);
+        for(int i=0; i<numOfSales; i++) {
+            Sale sale = new Sale(name, price);
+            addToList(sale);
+        }
     }
 
-    private String extractRegex(String input, String regex) {
+    private String extractRegex(String input, String regex, int index) {
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
         if (matcher.find()) {
-            return matcher.group(1);
+            return matcher.group(index);
         }
         return "regex not found";
-    }
-
-    private Sale getProductInfo(String sale) {
-        String name = extractRegex(sale, "([^\\\\\\s]+)");
-        String price = extractRegex(sale, "(\\d+)");
-        return new Sale(name, Integer.parseInt(price));
     }
 
     private void addToList(Sale sale) {
@@ -82,5 +88,12 @@ public class ParseInput {
                 sales.add(sale);
             }
         }
+    }
+
+    private String removeLastChar(String s) {
+        if(s == null || s.length() == 0) {
+            return s;
+        }
+        return s.substring(0, s.length()-1);
     }
 }

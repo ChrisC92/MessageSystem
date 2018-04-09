@@ -28,15 +28,17 @@ public class InputData {
         String orderPear1 = singularSale("pear", 10);
         String orderBanana1 = singularSale("banana", 15);
         List listOfSales = new LinkedList();
+        int j = 1;
         for(int i=0; i<NUMBER_OF_SALES; i++) {
             listOfSales.add(orderApple1);
             listOfSales.add(orderPear1);
             listOfSales.add(orderBanana1);
-            if(i % 100 == 0) {
+            if(i % 100 == 0 && i!=0) {
                 String add20Apples = multipleSale("apple", 5, 20);
                 String add30pears = multipleSale("pear", 10, 30);
                 listOfSales.add(add20Apples);
                 listOfSales.add(add30pears);
+                j++;
             }
         }
         return listOfSales;
@@ -52,7 +54,7 @@ public class InputData {
             listOfSales.add(orderApple1);
             listOfSales.add(orderPear1);
             listOfSales.add(orderBanana1);
-            if(i % 3000 == 0) {
+            if(i % 3000 == 0 && i != 0) {
                 String pearsPriceReduce = adjustPrice("pears", Adjustment.SUBTRACT, 5);
                 String bananasAddPrice = adjustPrice("banana", Adjustment.ADD, 5);
                 String applesTwiceThePrice = adjustPrice("apple", Adjustment.MULTIPLY, 2);

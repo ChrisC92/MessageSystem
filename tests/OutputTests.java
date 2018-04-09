@@ -65,8 +65,8 @@ public class OutputTests {
         Sale pears = sales.get(1);
         Sale bananas = sales.get(2);
 
-        assertEquals(1600, apples.getNumberOfSales());
-        assertEquals(1900, pears.getNumberOfSales());
+        assertEquals(1180, apples.getNumberOfSales());
+        assertEquals(1270, pears.getNumberOfSales());
     }
 
     @Test
