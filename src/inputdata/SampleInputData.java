@@ -1,11 +1,10 @@
-package input;
+package inputdata;
 
 
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
-public class InputData {
+public class SampleInputData {
 
 
     public static Queue batchSingleSales(int NUMBER_OF_SALES) {

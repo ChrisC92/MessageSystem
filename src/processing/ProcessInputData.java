@@ -1,7 +1,6 @@
 package processing;
 
-
-import com.sun.javaws.exceptions.InvalidArgumentException;
+import output.messages.ConsoleMessages;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -9,19 +8,31 @@ import java.util.Queue;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ParseInput {
+public class ProcessInputData {
 
     private List<Sale> sales;
     private List<String> salesRawData;
 
-    public ParseInput() {
+    public ProcessInputData() {
         sales = new LinkedList();
         salesRawData = new LinkedList<>();
     }
 
-    public void addSalesFromList(Queue<String> sales) {
+    public void addSalesFromQueue(Queue<String> sales) {
+        int saleCount = 0;
         for (String sale : sales) {
-            addSale(sale);
+            try {
+                addSale(sale);
+            } catch(IllegalArgumentException e ) {
+                e.printStackTrace();
+            }
+            saleCount++;
+            if(saleCount % 10 == 0) {
+                ConsoleMessages.printMessage10thSale(this.sales);
+            }
+            if(saleCount % 50 == 0) {
+                ConsoleMessages.printMessage50thSale(this.sales);
+            }
         }
     }
 
@@ -56,12 +67,8 @@ public class ParseInput {
         salesRawData.add(saleString);
     }
 
-    // ADD 20p apples
-    // SUBTRACT 10p apples
-    // MULTIPLY 2 apples
-    //TODO: add to raw data list
     private void createAdjustmentProduct(String saleString) {
-
+        salesRawData.add(saleString);
         // Regex will take the first characters before first whitespace from the saleString
         String modifierType = extractRegex(saleString, "([^\\\\\\s]+)" , 0);
 
@@ -117,6 +124,7 @@ public class ParseInput {
             for(Sale sale : sales) {
                 if(sale.getName().equals(product)) {
                     modifyProduct(sale, modifier, amount);
+                    sale.addToAdjustments(modifier + " by " + amount);
                 }
             }
         }

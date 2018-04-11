@@ -1,6 +1,6 @@
-import input.InputData;
+import inputdata.SampleInputData;
 import org.junit.Test;
-import processing.ParseInput;
+import processing.ProcessInputData;
 import processing.Sale;
 
 import java.util.List;
@@ -17,12 +17,12 @@ public class OutputTests {
 
     @Test
     public void singularTest() {
-        ParseInput parseInput60 = new ParseInput();
-        Queue<String> orders60 = InputData.batchSingleSales(60);
-        Queue<String> orders3000 = InputData.batchSingleSales(3000);
+        ProcessInputData processInputData60 = new ProcessInputData();
+        Queue<String> orders60 = SampleInputData.batchSingleSales(60);
+        Queue<String> orders3000 = SampleInputData.batchSingleSales(3000);
 
-        parseInput60.addSalesFromList(orders60);
-        List<Sale> sales60 = parseInput60.getListOfSales();
+        processInputData60.addSalesFromQueue(orders60);
+        List<Sale> sales60 = processInputData60.getListOfSales();
         Sale apples60 = sales60.get(0);
         Sale pears60 = sales60.get(1);
         Sale bananas60 = sales60.get(2);
@@ -35,9 +35,9 @@ public class OutputTests {
         assertEquals("pear", pears60.getName());
         assertEquals("banana", bananas60.getName());
 
-        ParseInput parseInput3000 = new ParseInput();
-        parseInput3000.addSalesFromList(orders3000);
-        List<Sale> sales3000 = parseInput3000.getListOfSales();
+        ProcessInputData processInputData3000 = new ProcessInputData();
+        processInputData3000.addSalesFromQueue(orders3000);
+        List<Sale> sales3000 = processInputData3000.getListOfSales();
         Sale apples3000 = sales3000.get(0);
         Sale pears3000 = sales3000.get(1);
         Sale bananas3000 = sales3000.get(2);
@@ -58,10 +58,10 @@ public class OutputTests {
 
     @Test
     public void multipleTest() {
-        ParseInput parseInput = new ParseInput();
-        Queue<String> orders = InputData.batchMultipleSales(3000);
-        parseInput.addSalesFromList(orders);
-        List<Sale> sales = parseInput.getListOfSales();
+        ProcessInputData processInputData = new ProcessInputData();
+        Queue<String> orders = SampleInputData.batchMultipleSales(3000);
+        processInputData.addSalesFromQueue(orders);
+        List<Sale> sales = processInputData.getListOfSales();
         Sale apples = sales.get(0);
         Sale pears = sales.get(1);
 
@@ -71,10 +71,10 @@ public class OutputTests {
 
     @Test
     public void modifyTestBasic() {
-        ParseInput parseInput = new ParseInput();
-        Queue<String> orders = InputData.batchModifySales(3);
-        parseInput.addSalesFromList(orders);
-        List<Sale> sales = parseInput.getListOfSales();
+        ProcessInputData processInputData = new ProcessInputData();
+        Queue<String> orders = SampleInputData.batchModifySales(3);
+        processInputData.addSalesFromQueue(orders);
+        List<Sale> sales = processInputData.getListOfSales();
         Sale apples = sales.get(0);
         Sale pears = sales.get(1);
         Sale bananas = sales.get(2);
@@ -87,10 +87,10 @@ public class OutputTests {
 
     @Test
     public void modifyTests3000() {
-        ParseInput parseInput = new ParseInput();
-        Queue<String> orders = InputData.batchModifySales(3000);
-        parseInput.addSalesFromList(orders);
-        List<Sale> sales = parseInput.getListOfSales();
+        ProcessInputData processInputData = new ProcessInputData();
+        Queue<String> orders = SampleInputData.batchModifySales(3000);
+        processInputData.addSalesFromQueue(orders);
+        List<Sale> sales = processInputData.getListOfSales();
         Sale apples = sales.get(0);
         Sale pears = sales.get(1);
         Sale bananas = sales.get(2);
