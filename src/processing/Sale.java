@@ -5,17 +5,17 @@ import java.util.Objects;
 public class Sale {
 
     private String productName;
-    private int price;
+    private int currentPrice;
     private int numberOfSales =1;
 
     public Sale(String name, int initPrice) {
         productName = name;
-        price = initPrice;
+        currentPrice = initPrice;
     }
 
-    public void setPrice(int price ) {
-        if(price >= 0 ) {
-            this.price = price;
+    public void setCurrentPrice(int currentPrice) {
+        if(currentPrice >= 0 ) {
+            this.currentPrice = currentPrice;
         }
     }
 
@@ -24,11 +24,11 @@ public class Sale {
     }
 
     public int getCurrrentPrice() {
-        return price;
+        return currentPrice;
     }
 
     public int getTotalCost() {
-        return price * numberOfSales;
+        return currentPrice * numberOfSales;
     }
 
     public int getNumberOfSales() {
@@ -40,7 +40,7 @@ public class Sale {
 
     @Override
     public String toString(){
-        return productName + " at " + price + "p";
+        return productName + " at " + currentPrice + "p";
     }
 
     @Override

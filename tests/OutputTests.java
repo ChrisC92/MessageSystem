@@ -4,6 +4,7 @@ import processing.ParseInput;
 import processing.Sale;
 
 import java.util.List;
+import java.util.Queue;
 
 import static org.junit.Assert.assertEquals;
 
@@ -17,8 +18,8 @@ public class OutputTests {
     @Test
     public void singularTest() {
         ParseInput parseInput60 = new ParseInput();
-        List<String> orders60 = InputData.batchSingleSales(60);
-        List<String> orders3000 = InputData.batchSingleSales(3000);
+        Queue<String> orders60 = InputData.batchSingleSales(60);
+        Queue<String> orders3000 = InputData.batchSingleSales(3000);
 
         parseInput60.addSalesFromList(orders60);
         List<Sale> sales60 = parseInput60.getListOfSales();
@@ -58,21 +59,36 @@ public class OutputTests {
     @Test
     public void multipleTest() {
         ParseInput parseInput = new ParseInput();
-        List<String> orders = InputData.batchMultipleSales(3000);
+        Queue<String> orders = InputData.batchMultipleSales(3000);
         parseInput.addSalesFromList(orders);
         List<Sale> sales = parseInput.getListOfSales();
         Sale apples = sales.get(0);
         Sale pears = sales.get(1);
-        Sale bananas = sales.get(2);
 
         assertEquals(1180, apples.getNumberOfSales());
         assertEquals(1270, pears.getNumberOfSales());
     }
 
     @Test
-    public void modifyTests() {
+    public void modifyTestBasic() {
         ParseInput parseInput = new ParseInput();
-        List<String> orders = InputData.batchModifySales(3000);
+        Queue<String> orders = InputData.batchModifySales(3);
+        parseInput.addSalesFromList(orders);
+        List<Sale> sales = parseInput.getListOfSales();
+        Sale apples = sales.get(0);
+        Sale pears = sales.get(1);
+        Sale bananas = sales.get(2);
+
+        assertEquals(5, pears.getCurrrentPrice());
+        assertEquals(10, apples.getCurrrentPrice());
+        assertEquals(20, bananas.getCurrrentPrice());
+
+    }
+
+    @Test
+    public void modifyTests3000() {
+        ParseInput parseInput = new ParseInput();
+        Queue<String> orders = InputData.batchModifySales(3000);
         parseInput.addSalesFromList(orders);
         List<Sale> sales = parseInput.getListOfSales();
         Sale apples = sales.get(0);
